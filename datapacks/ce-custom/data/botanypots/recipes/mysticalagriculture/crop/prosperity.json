@@ -1,0 +1,45 @@
+{
+    "bookshelf:load_conditions": [
+        {
+            "type": "bookshelf:item_exists",
+            "values": [
+                "mysticalagriculture:prosperity_seed_base",
+                "mysticalagriculture:prosperity_shard"
+            ]
+        }
+    ],
+    "type": "botanypots:crop",
+    "seed": {
+        "item": "mysticalagriculture:prosperity_seed_base"
+    },
+    "categories": [
+        "inferium"
+    ],
+    "growthTicks": 1800,
+    "display": {
+        "type": "botanypots:aging",
+        "block": "mysticalagriculture:rock_crystal_crop"
+    },
+    "drops": [
+        {
+            "chance": 1.00,
+            "output": {
+                "item": "mysticalagriculture:prosperity_shard"
+            }
+        },
+        {
+            "chance": 0.01,
+            "output": {
+                "item": "mysticalagriculture:prosperity_seed_base"
+            }
+        },
+        {
+            "chance": 0.01,
+            "output": {
+                "item": "mysticalagriculture:fertilized_essence"
+            },
+            "minRolls": 1,
+            "maxRolls": 1
+        }
+    ]
+}

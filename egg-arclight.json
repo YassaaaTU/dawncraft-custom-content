@@ -1,0 +1,46 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-08-21T12:44:45+02:00",
+    "name": "Arclight",
+    "author": "stickempire1@gmail.com",
+    "description": "This egg runs an Arclight 1.20.1 Minecraft server, allowing both Forge and Bukkit\/Spigot mods\/plugins.",
+    "features": null,
+    "docker_images": {
+        "Java 21": "ghcr.io\/pterodactyl\/yolks:java_21",
+        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
+        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8"
+    },
+    "file_denylist": [],
+    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true $( [[  ! -f unix_args.txt ]] && printf %s \"-jar {{SERVER_JARFILE}}\" || printf %s \"@unix_args.txt\" )",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Arclight Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt install -y curl unzip\r\n\r\nif [[ ! -d \/mnt\/server ]]; then\r\n  mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\n# Define the download link and the expected jar file name after extraction\r\nDOWNLOAD_LINK=\"https:\/\/github.com\/IzzelAliz\/Arclight\/actions\/runs\/10341068748\"\r\nZIP_FILE=\"Arclight.zip\"\r\nJAR_FILE=\"arclight-forge-1.20.1-1.0.6-SNAPSHOT.jar\"\r\nFINAL_JAR=\"arclight.jar\"\r\n\r\n# Download the zip file\r\necho -e \"Downloading Arclight from ${DOWNLOAD_LINK}\"\r\ncurl -L -o ${ZIP_FILE} ${DOWNLOAD_LINK}\r\n\r\n# Verify if the zip file was downloaded\r\nif [[ ! -f ${ZIP_FILE} ]]; then\r\n  echo \"!!! Error downloading Arclight !!!\"\r\n  exit 1\r\nfi\r\n\r\n# Extract the zip file\r\necho -e \"Extracting Arclight...\"\r\nunzip -o ${ZIP_FILE}\r\n\r\n# Rename the jar file to arclight.jar\r\nmv ${JAR_FILE} ${FINAL_JAR}\r\n\r\n# Clean up by removing the zip file\r\necho -e \"Cleaning up installation files...\"\r\nrm -rf ${ZIP_FILE}\r\n\r\n# Confirm that the setup is complete\r\necho -e \"Arclight installation completed successfully. The server jar is ${FINAL_JAR}.\"",
+            "container": "openjdk:17-jdk-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "arclight.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
+        }
+    ]
+}

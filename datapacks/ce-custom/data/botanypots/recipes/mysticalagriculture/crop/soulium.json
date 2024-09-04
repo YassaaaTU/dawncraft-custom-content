@@ -1,0 +1,45 @@
+{
+    "bookshelf:load_conditions": [
+        {
+            "type": "bookshelf:item_exists",
+            "values": [
+                "mysticalagriculture:soulium_seed_base",
+                "mysticalagriculture:soulium_dust"
+            ]
+        }
+    ],
+    "type": "botanypots:crop",
+    "seed": {
+        "item": "mysticalagriculture:soulium_seed_base"
+    },
+    "categories": [
+        "inferium"
+    ],
+    "growthTicks": 1800,
+    "display": {
+        "type": "botanypots:aging",
+        "block": "mysticalagriculture:tinkers_bronze_crop"
+    },
+    "drops": [
+        {
+            "chance": 1.00,
+            "output": {
+                "item": "mysticalagriculture:soulium_dust"
+            }
+        },
+        {
+            "chance": 0.01,
+            "output": {
+                "item": "mysticalagriculture:soulium_seed_base"
+            }
+        },
+        {
+            "chance": 0.01,
+            "output": {
+                "item": "mysticalagriculture:fertilized_essence"
+            },
+            "minRolls": 1,
+            "maxRolls": 1
+        }
+    ]
+}
